@@ -1,41 +1,43 @@
-const  mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const billSchema = new mongoose.Schema({
-    bl_no : {
-        type : String,
-        required : true,
-        unique : true
-    },
-    name : String,
-    company : {
-        type : String,
-        required : true,
-    },
-    vatNo : String,
-    email : {
-        type : String,
-        // required : true,
-    },
-    invoice_number : String,
-    vatPercentage : Number,
-    extraCharge : Number,
-    paidStatus : {
-        type : Boolean,
-        default : false,
-    },
-    paidAmount : {
-        type : Number,
-        default : 0
-    },
-    extraChargeDescription : String,
-    extraChargeData : [],
-    fieldsData : [],
-    date : {
-        type : String,
-        required : true,
-    }
+  bl_no: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  name: String,
+  company: {
+    type: String,
+    required: true,
+  },
+  vatNo: String,
+  email: {
+    type: String,
+    // required : true,
+  },
+  invoice_number: {
+    type: String,
+    required: true,
+  },
+  vatPercentage: Number,
+  extraCharge: Number,
+  paidStatus: {
+    type: Boolean,
+    default: false,
+  },
+  paidAmount: {
+    type: Number,
+    default: 0,
+  },
+  extraChargeDescription: String,
+  extraChargeData: [],
+  fieldsData: [],
+  date: {
+    type: String,
+    required: true,
+  },
+});
 
-})
-
-const billModel = mongoose.model("bill" , billSchema);
+const billModel = mongoose.model("bill", billSchema);
 module.exports = billModel;
