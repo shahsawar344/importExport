@@ -17,7 +17,8 @@ const billSchema = new mongoose.Schema({
     // required : true,
   },
   invoice_number: {
-    type: String,
+      type: String,
+    unique: true,
     required: true,
   },
   vatPercentage: Number,
