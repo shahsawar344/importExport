@@ -14,9 +14,9 @@ const billSchema = new mongoose.Schema({
     vatNo : Number,
     email : {
         type : String,
-        required : true,
+        // required : true,
     },
-    invoice_number : Number,
+    invoice_number : String,
     vatPercentage : Number,
     extraCharge : Number,
     paidStatus : {

@@ -176,6 +176,62 @@ exports.getAllBillsByCompanyName = async (req, res) => {
         })
     }
 }
+exports.getAllBillsByInvoiceNumber = async (req, res) => {
+    try{
+        const page = req.query.page;
+        const limit = req.query.limit;
+        const invoice_number = req.query.invoice_number;
+
+
+        if(!page || !limit || !invoice_number) {
+            return(
+                res.json({
+                    message : "invoice_number ,Page and limit must be specified",
+                    status : false
+                })
+            )
+        }
+        const result = await billModel.find({invoice_number : {$regex : invoice_number , $options : "i" }}).skip((parseInt(page)-1 )*parseInt(limit)).limit(parseInt(limit)).sort({$natural : -1});
+
+        if(!result){
+            return(
+                res.json({
+                    message : "Bills with invoice_number could not Fetched",
+                    status : false,
+                    result : null
+                })
+            )
+        }else{
+            const updatedResult = result.map((bill) => {
+                let totalAmount = 0;
+                if(bill.fieldsData?.length > 0) {
+                     totalAmount = bill.fieldsData.reduce(
+                        (sum, field) => sum + parseInt(field.price),
+                        0
+                    );
+                }else{
+                    totalAmount = 0
+                }
+               
+
+                return { ...bill.toObject(), totalAmount };
+            });
+
+            return res.json({
+                message : "Bills with invoice_number Fetched successfully",
+                status : true,
+                result : updatedResult
+            })
+        }
+    }
+    catch(err){
+        res.json({
+            message : "Error Occured",
+            status : false,
+            error : err.message
+        })
+    }
+}
 
 exports.getAllBillsByVatNo = async (req, res) => {
     try{
