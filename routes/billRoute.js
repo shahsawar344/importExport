@@ -5,6 +5,7 @@ const controller = require("../controllers/billController");
 router.post("/create-bill" , controller.createBill);
 router.get("/getAllBills" , controller.getAllBills);
 router.get("/getAllBillsByCompanyName" , controller.getAllBillsByCompanyName);
+router.get("/getAllBillsByInvoiceNumber" , controller.getAllBillsByInvoiceNumber);
 router.get("/getAllBillsByVatNo" , controller.getAllBillsByVatNo);
 router.put("/updatePaidAmount" , controller.updateBillPaidAmount);
 router.delete("/deleteBill" , controller.deleteBill);
