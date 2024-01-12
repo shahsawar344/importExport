@@ -28,17 +28,17 @@ exports.createBill = async (req, res) => {
       });
     }
 
-    const found = await billModel.findOne({
-      vatNo: req.body.vatNo,
-      company: { $ne: req.body.company },
-    });
-    if (found) {
-      return res.json({
-        message:
-          "This vatNO is already assigned to some other company , You cannot use one vatNO for more than one company",
-        status: false,
-      });
-    }
+    // const found = await billModel.findOne({
+    //   vatNo: req.body.vatNo,
+    //   company: { $ne: req.body.company },
+    // });
+    // if (found) {
+    //   return res.json({
+    //     message:
+    //       "This vatNO is already assigned to some other company , You cannot use one vatNO for more than one company",
+    //     status: false,
+    //   });
+    // }
 
     const newBill = new billModel({
       ...req.body,
