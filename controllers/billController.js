@@ -3,21 +3,20 @@ const billModel = require("../models/billModel");
 
 exports.createBill = async (req, res) => {
   try {
-    if (
-      !req.body.date ||
-      !req.body.email ||
-      !req.body.company ||
-      !req.body.bl_no
-    ) {
+    if (!req.body.date || !req.body.bl_no) {
       return res.json({
         message: "date , company , bill_no and email is required fields",
         status: false,
       });
     }
     const foundBillNo = await billModel.findOne({ bl_no: req.body.bl_no });
-    if (foundBillNo) {
+    const foundInvoiceNumber = await billModel.findOne({
+      invoice_number: req.body.invoice_number,
+    });
+    if (foundBillNo && foundInvoiceNumber) {
       return res.json({
-        message: "This bill no is already associated with another bill",
+        message:
+          "This bill no && invoice number is already associated with another bill",
         status: false,
       });
     }
