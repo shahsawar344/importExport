@@ -13,10 +13,17 @@ exports.createBill = async (req, res) => {
     const foundInvoiceNumber = await billModel.findOne({
       invoice_number: req.body.invoice_number,
     });
-    if (foundBillNo && foundInvoiceNumber) {
+    if (foundBillNo) {
       return res.json({
         message:
-          "This bill no && invoice number is already associated with another bill",
+          "This bill no is already associated with another bill",
+        status: false,
+      });
+    }
+    if (foundInvoiceNumber) {
+      return res.json({
+        message:
+          "This invoice no is already associated with another bill",
         status: false,
       });
     }
