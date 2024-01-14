@@ -31,6 +31,10 @@ const billSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  creditAmount: {
+    type: Number,
+    default: 0,
+  },
   extraChargeDescription: String,
   extraChargeData: [],
   fieldsData: [],

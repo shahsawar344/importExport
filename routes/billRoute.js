@@ -8,6 +8,7 @@ router.get("/getAllBillsByCompanyName" , controller.getAllBillsByCompanyName);
 router.get("/getAllBillsByInvoiceNumber" , controller.getAllBillsByInvoiceNumber);
 router.get("/getAllBillsByVatNo" , controller.getAllBillsByVatNo);
 router.put("/updatePaidAmount" , controller.updateBillPaidAmount);
+router.put("/updateBillCreditAmount" , controller.updateBillCreditAmount);
 router.delete("/deleteBill" , controller.deleteBill);
 
 

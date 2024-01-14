@@ -15,15 +15,13 @@ exports.createBill = async (req, res) => {
     });
     if (foundBillNo) {
       return res.json({
-        message:
-          "This bill no is already associated with another bill",
+        message: "This bill no is already associated with another bill",
         status: false,
       });
     }
     if (foundInvoiceNumber) {
       return res.json({
-        message:
-          "This invoice no is already associated with another bill",
+        message: "This invoice no is already associated with another bill",
         status: false,
       });
     }
@@ -344,6 +342,47 @@ exports.updateBillPaidAmount = async (req, res) => {
   }
 };
 
+exports.updateBillCreditAmount = async (req, res) => {
+  try {
+    const bill_id = req.body.bill_id;
+    const creditAmount = req.body.creditAmount;
+    let paidStatus = false;
+
+    if (parseInt(creditAmount) > 0) {
+      paidStatus = true;
+    }
+
+    const result = await billModel.findOneAndUpdate(
+      { _id: bill_id },
+      {
+        creditAmount: creditAmount,
+        paidStatus: paidStatus,
+      },
+      { new: true }
+    );
+
+    if (!result) {
+      return res.json({
+        message: "Credit amount could not updated",
+        status: false,
+        result: null,
+      });
+    } else {
+      return res.json({
+        message: "Credit amount updated successfully",
+        status: true,
+        result: result,
+      });
+    }
+  } catch (err) {
+    res.json({
+      message: "Error Occured",
+      status: false,
+      error: err.message,
+    });
+  }
+};
+
 exports.deleteBill = async (req, res) => {
   try {
     const bill_id = req.query.bill_id;
@@ -357,7 +396,7 @@ exports.deleteBill = async (req, res) => {
       });
     } else {
       return res.json({
-        message: "Bill paidAmount delted successfully",
+        message: "Bill paidAmount deleted successfully",
         status: true,
         result: result,
       });
