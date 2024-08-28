@@ -15,7 +15,7 @@ const driverReportSchema = new mongoose.Schema({
   balance: Number,
   company: String,
   date: {
-    type: Date,
+    type: String,
   },
 });
 
