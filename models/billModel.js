@@ -37,6 +37,7 @@ const billSchema = new mongoose.Schema({
   },
   extraChargeDescription: String,
   extraChargeData: [],
+  description: String,
   fieldsData: [],
   date: {
     type: String,
